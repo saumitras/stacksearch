@@ -1,0 +1,202 @@
+<html>
+<head>
+
+  <link href="css/main.css" rel="stylesheet">
+  <link href="lib/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
+  <link href="lib/jquery-autocomplete-master/src/jquery.autocomplete.css" rel="stylesheet">
+  <link href="lib/flaviusmatis-simplePagination.js/simplePagination.css" rel="stylesheet">
+  
+
+  <script type="text/javascript" src='js/jquery.min.js'></script>
+  <script type="text/javascript" src='lib/datetimepicker/jquery.datetimepicker.js'></script>
+  <script type="text/javascript" src='lib/jquery-autocomplete-master/src/jquery.autocomplete.js'></script>
+
+
+  <script type="text/javascript" src='lib/flaviusmatis-simplePagination.js/jquery.simplePagination.js'></script>
+  
+  
+  <title>
+    StackSearch
+  </title>
+
+
+</head>
+
+<body>
+
+  <div id='header'>
+
+    <div class="logo">
+      <a href="#" >
+        <img src=img/solrlogo.png height="50px" width="120px" />
+      </a>
+    </div>
+
+    <div class="toolbar">
+      <input type="text" value="" placeholder='Search...' id="querybox" />
+
+      <input type="text" id="start-date-div" class="datetime-elem"  />
+      <input type="text" id="end-date-div"  class="datetime-elem" />
+
+      <img src="img/search.png"  class="searchicon" />
+      
+    </div>
+
+    <div class="links">
+      <a href="#">Help</a>
+    </div>
+
+  </div>
+
+
+  <div id="console">
+    <span class='query'>
+      <a href="#">
+       http://localhost:8983/solr/ar/select/?q=type:("SECTION" OR "SYS" OR "NA") AND NOT filename:(*do_not_show)&fq=obs_date:[2004-03-14T00:00:00Z%2D330MINUTES TO 2014-03-12T17:51:40Z%2D330MINUTES]
+     </a>
+   </span>
+
+ </div>
+
+
+
+
+ <div id="left-nav"> 
+
+  <div id="clusters">
+    <h1>Clusters</h1>
+    <ul>
+      <li>Cluster 1 (0.0)(0.0)</li>
+      <li>Cluster 1 (0.0)</li>
+    </ul>
+
+  </div>
+
+
+  <hr/>
+
+  <div id="facets">
+
+    <h1>Filters</h1>
+
+    <label class="facet-heading">Facet1</label>
+    <ul>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Te</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Te</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+    </ul>
+
+    <label class="facet-heading">Facet1</label>
+    <ul>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Te</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Te</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+      <li><label><input type="checkbox" name="checkbox" value="value1">Temporary facet</label></li>
+    </ul>
+
+
+  </div>
+
+</div> <!-- end of left-nav -->
+
+
+<div id="right-nav">  
+
+  <!-- area to display the selected facets/filters -->
+  <div id="filter-bar">
+    <span class='filter'>Stackexchage <img src="img/close1.png" width="12px" height="12px" /> |</span>
+    <span class='filter'>Stackexchage <img src="img/close1.png" width="12px" height="12px" /> |</span>
+  </div>
+
+
+  <!-- toolbar area to show result-found/status/pagination/sorting,etc -->
+  <div id="toolbar">
+    <span id="status-message">192 results found in 876 ms</span>
+    <span id="sort">Sort
+      <select>
+        <option selected="selected">Desc</option>
+        <option>Asc</option>
+      </select>
+    </span>
+
+    <span id='pagination'></span>
+
+  </div>
+
+
+  <!-- main results area -->
+  <div id="result-list">
+
+    <div class="result">
+      <div class="result-header">
+        skanslka
+      </div>
+      <div class="result-content">
+        snkansajk
+      </div>
+      <div class="comments">
+        <li>nsajsasaskas</li>
+        <li>nsajsasaskas</li>
+        <li>nsajsasaskas</li>
+      </div>
+    </div>
+
+
+    <div class="result">
+      <div class="result-header">
+        skanslka
+      </div>
+      <div class="result-content">
+        snkansajk
+      </div>
+      <div class="comments">
+        <li>nsajsasaskas</li>
+        <li>nsajsasaskas</li>
+        <li>nsajsasaskas</li>
+      </div>
+    </div>
+
+
+
+
+    <div class="result">
+      <div class="result-header">
+        skanslka
+      </div>
+      <div class="result-content">
+        snkansajk
+      </div>
+      <div class="comments">
+        <li>nsajsasaskas</li>
+        <li>nsajsasaskas</li>
+        <li>nsajsasaskas</li>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  
+</div>
+
+
+<script type="text/javascript" src='js/main.js'></script>
+
+
+</body>
+
+</html>
