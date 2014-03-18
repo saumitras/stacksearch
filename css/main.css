@@ -24,8 +24,10 @@ a { text-decoration: none;}
 /* left-nav */
 #left-nav { width: 250px; font-size: 12px; float: left;}
 
-#clusters ul {display: inline; padding: 0 0 0 0; }
+#clusters ul { padding: 0 0 0 0; }
 #clusters ul li {margin: 0px 10px 0px 10px;}
+
+#clustervalues { max-height: 100px; overflow: auto; }
 
 #facets ul { padding: 0 0 0 0; max-height: 100px; overflow: auto;}
 #facets ul li {margin: 0px 10px 0px 10px;}

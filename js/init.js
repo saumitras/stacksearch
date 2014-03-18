@@ -6,6 +6,8 @@ $(document).ready(function() {
 	initAutoComplete();
 	initPagination();
 
+	startSearch();
+
 });
 
 function initAutoComplete() {
@@ -34,6 +36,9 @@ function initPagination() {
 		cssStyle: 'light-theme'
 	});
 
+}
 
 
+function startSearch() {
+	querySolr();
 }
