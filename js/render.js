@@ -78,6 +78,8 @@ function onFacetSelection() {
 
 		}
 
+		
+
 	});
 	
 
@@ -100,17 +102,20 @@ function addNewFacet(data) {
 
 	$('#filter-bar').append(filterHTMLTemplate);
 
+	querySolr();
+
+
+
+	//define the on-close-icon-click event handler
 	$('#filter-bar').find('span').last().find('img').click(function() {
 		var facetname = $(this).parent().attr('facetname');
 		var value = $(this).parent().attr('value');
 
 		$('#facetvalues ul').filter("[facetname='" + facetname + "']").find("[value='" + value + "']").find(':checkbox').removeAttr('checked');
 		$(this).parent().remove();
+		querySolr();
 
 	});
-
-	//add new facet on the filter bar
-	//var facetHTMLTempplate = 
 
 }
 
@@ -121,6 +126,8 @@ function removeFacet(data) {
 	var value = data.value;
 
 	$('#filter-bar').find("[facetname='"+ facetName + "']").filter("[value='" + value +"']").remove();
+
+	querySolr();
 
 }
 

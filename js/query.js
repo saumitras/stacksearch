@@ -1,3 +1,4 @@
+
 function querySolr() {
 
 //	var params = getQueryParams();
@@ -46,9 +47,13 @@ function getQueryParams() {
 		searchtext = "data";
 	}
 
-	var facets = getSelectedFacets();
-
+	
 	var queryString = "st_post:(\"" + searchtext + "\")";
+
+	var facetQueryString = getFacetQueryString();
+	if(facetQueryString != "") {
+		queryString += " AND " + facetQueryString;
+	}
 
 	params['q'] = queryString;
 
@@ -57,11 +62,23 @@ function getQueryParams() {
 
 }
 
+function getFacetQueryString() {
+	
+	var tempArray = [];
+	
+	$.each((getSelectedFacets()),function(facetName,valueArray) {
+		 var str = facetName + ":(\"" + valueArray.join('" OR "') + "\")"
+		 tempArray.push(str);
+	});
+
+	return tempArray.join(' AND ');
+
+}
 
 function getSelectedFacets() {
 
 	var facets = {};
-	$('#filter-bar span').each(function() { 
+	$('#filter-bar span').each(function() {
 		
 		var facetName = $(this).attr('facetname');
 		var value = $(this).attr('value');
