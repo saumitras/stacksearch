@@ -3,6 +3,9 @@ var APPDATA = {
 		primary:"collection1"
 	},
 	"facets":{
+		'st_site': {
+			label: "SITE"
+		},
 		'st_tags':{
 			label: "TAGS"
 		},

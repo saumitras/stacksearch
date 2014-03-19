@@ -7,11 +7,11 @@
   <link href="lib/flaviusmatis-simplePagination.js/simplePagination.css" rel="stylesheet">
   
 
-  <script type="text/javascript" src='js/jquery.min.js'></script>
+  <script type="text/javascript" src='lib/jquery.min.js'></script>
+  <script type="text/javascript" src='lib/date.js'></script>
+  <script type="text/javascript" src='lib/date.format.js'></script>
   <script type="text/javascript" src='lib/datetimepicker/jquery.datetimepicker.js'></script>
   <script type="text/javascript" src='lib/jquery-autocomplete-master/src/jquery.autocomplete.js'></script>
-
-
   <script type="text/javascript" src='lib/flaviusmatis-simplePagination.js/jquery.simplePagination.js'></script>
   
   
@@ -147,8 +147,17 @@
     <span id="status-message">192 results found in 876 ms</span>
     <span id="sort">Sort
       <select>
-        <option selected="selected">Desc</option>
-        <option>Asc</option>
+        <option selected="selected">Latest</option>
+        <option>Oldest</option>
+        <option>Highest Score</option>
+      </select>
+    </span>
+
+    <span id="rows">Rows
+      <select>
+        <option selected="selected">20</option>
+        <option>50</option>
+        <option>100</option>
       </select>
     </span>
 

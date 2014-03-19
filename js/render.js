@@ -1,6 +1,11 @@
 function populateResults(response) {
 	console.log(response);
 
+	var qTime = response['responseHeader']['QTime'] + " ms";
+	var numFound = response['response']['numFound'];
+
+	$('#status-message').html(numFound + " matches(" + qTime +")");
+
 	if(response.hasOwnProperty('facet_counts')) {
 		showFacets(response['facet_counts']['facet_fields']);
 	}
@@ -10,6 +15,9 @@ function populateResults(response) {
 	}
 
 	if(response.hasOwnProperty('highlighting') && response.hasOwnProperty('response')) {
+
+
+
 		showDocs({
 			highlighting: response['highlighting'],
 			docs: response['response']['docs']
@@ -24,7 +32,7 @@ function populateResults(response) {
 	the facet which is selected at present will not be refreshed....selected facet will be stored in APPDATA.selectedFacet
 */
 function showFacets(data) {
-	console.log(data);
+	//console.log(data);
 
 
 	$('#facetvalues').html("");

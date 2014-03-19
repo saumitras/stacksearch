@@ -1,4 +1,6 @@
-body {margin: 0px; padding: 0px; font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif; background-color: #F8F8F8}
+body {margin: 0px; padding: 0px; font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif; background-color: #F8F8F8;
+		font-size:14px;		
+}
 a { text-decoration: none;}
 em { background-color: #DBE232; color: #D33D3D; font-weight: bold; }
 
@@ -42,6 +44,7 @@ em { background-color: #DBE232; color: #D33D3D; font-weight: bold; }
 /*image in the facet filter bar*/
 #filter-bar .filter img {  height: 12px; width: 12px; cursor: pointer; margin-left: 3px; } 
 
+#status-message { background-color: #000; color: #FFF; padding: 2px 5px 2px 5px; border-radius: 10px; }
 
 #toolbar { }
 #pagination { float: right; }
@@ -52,7 +55,7 @@ em { background-color: #DBE232; color: #D33D3D; font-weight: bold; }
 .colname-style1 { font-weight: bold; margin-right: 5px; }
 .value-style1 { font-weight: bold; margin-right: 10px; }
 .comments { margin-top: 10px; }
-.comments li { margin-top: 5px; font-size: 14px; }
+.comments li { margin-top: 5px; font-size: 12px; }
 .result-content { margin-top: 10px;}
 
 

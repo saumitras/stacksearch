@@ -6,6 +6,12 @@ $(document).ready(function() {
 		querySolr();
 	});
 
+	$('#querybox').bind('keyup', function(e){
+		if(e.keyCode == 13) {
+			startSearch();
+		}
+	});
+
 	initAutoComplete();
 	initPagination();
 

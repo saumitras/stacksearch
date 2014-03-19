@@ -1,4 +1,4 @@
-function getFilters() {
+/*function getFilters() {
 	
 }
 
@@ -21,4 +21,4 @@ function getRows() {
 
 function getSort() {
 
-}
+}*/
