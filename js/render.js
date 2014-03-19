@@ -36,26 +36,90 @@ function showFacets(data) {
 							  "</label>";
 
 
-
-
 		for(var n=0;n<facetVals.length;n=n+2) {
 			var value = facetVals[n];
 			var count =  facetVals[(n+1)];
 
-			valueHTMLTemplate += "<li><label><input type='checkbox'>" + value + " (" + count + ")" +"</label></li>"
+			valueHTMLTemplate += "<li><label value='" + value + "'>" +
+										"<input type='checkbox'>" + value + " (" + count + ")" +
+								  "</label></li>";
 		}
 
 		$('#facetvalues').append(
-			headerHTMLTemplate + "<ul>" + valueHTMLTemplate + "</ul>"
+			headerHTMLTemplate + "<ul facetname='" + facetName +"'>" + valueHTMLTemplate + "</ul>"
 		);
 
 	});
 
-
-
+	onFacetSelection();
 
 }
 
+function onFacetSelection() {
+
+	$('#facetvalues').find(':checkbox').change(function() {
+
+		var data = {
+			'parent': $(this).parent().parent().parent().attr('facetname'),
+			'value' : $(this).parent().attr('value')	
+		}
+
+		if($(this).is(':checked')) {
+			
+			//add the facet on the filter bar
+			addNewFacet(data);
+
+		} else {
+			//remove the facet from the filter bar
+			removeFacet(data);
+
+		}
+
+	});
+	
+
+}
+
+
+/* add the selected facet on the filter bar */
+function addNewFacet(data) {
+
+	console.log(data);
+
+	var facetName = data.parent;
+	var value = data.value;
+
+	var filterHTMLTemplate = "<span class='filter' value='" + value + "' facetname='" + facetName + "'>" + 
+								value + 
+								"<img src='img/close1.png' /> |" +
+							 "</span>";
+
+
+	$('#filter-bar').append(filterHTMLTemplate);
+
+	$('#filter-bar').find('span').last().find('img').click(function() {
+		var facetname = $(this).parent().attr('facetname');
+		var value = $(this).parent().attr('value');
+
+		$('#facetvalues ul').filter("[facetname='" + facetname + "']").find("[value='" + value + "']").find(':checkbox').removeAttr('checked');
+		$(this).parent().remove();
+
+	});
+
+	//add new facet on the filter bar
+	//var facetHTMLTempplate = 
+
+}
+
+
+function removeFacet(data) {
+
+	var facetName = data.parent;
+	var value = data.value;
+
+	$('#filter-bar').find("[facetname='"+ facetName + "']").filter("[value='" + value +"']").remove();
+
+}
 
 function showClusters(data) {
 
@@ -123,3 +187,5 @@ function showDocs(data) {
 	}
 
 }
+
+

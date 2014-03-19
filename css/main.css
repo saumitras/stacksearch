@@ -39,6 +39,10 @@ em { background-color: #DBE232; color: #D33D3D; font-weight: bold; }
 /* right-nav */
 #right-nav { margin-left: 280px; margin-top: 20px; }
 #filter-bar { margin-bottom: 20px; }
+/*image in the facet filter bar*/
+#filter-bar .filter img {  height: 12px; width: 12px; cursor: pointer; margin-left: 3px; } 
+
+
 #toolbar { }
 #pagination { float: right; }
 #result-list { margin-top: 20px; }

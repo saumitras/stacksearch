@@ -31,3 +31,13 @@ function querySolr() {
     });
 
 }
+
+
+function getQueryParams() {
+
+	var params = {};
+
+	//get search query text
+	var searchtext = $('#querybox').val();
+	
+}
