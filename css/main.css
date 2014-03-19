@@ -1,5 +1,6 @@
 body {margin: 0px; padding: 0px; font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif; background-color: #F8F8F8}
 a { text-decoration: none;}
+em { background-color: #DBE232; color: #D33D3D; font-weight: bold; }
 
 
 
@@ -36,19 +37,19 @@ a { text-decoration: none;}
 
 
 /* right-nav */
-
 #right-nav { margin-left: 280px; margin-top: 20px; }
-
 #filter-bar { margin-bottom: 20px; }
-
 #toolbar { }
-
 #pagination { float: right; }
-
 #result-list { margin-top: 20px; }
-#result-list .result { margin-bottom: 10px;}
+/*#result-list .result { margin-bottom: 10px; }*/
 
-
+.result { padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #000; }
+.colname-style1 { font-weight: bold; margin-right: 5px; }
+.value-style1 { font-weight: bold; margin-right: 10px; }
+.comments { margin-top: 10px; }
+.comments li { margin-top: 5px; font-size: 14px; }
+.result-content { margin-top: 10px;}
 
 
 

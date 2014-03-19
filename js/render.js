@@ -5,13 +5,17 @@ function populateResults(response) {
 		showFacets(response['facet_counts']['facet_fields']);
 	}
 
-
 	if(response.hasOwnProperty('clusters')) {
-		//showClusters(response['clusters']);
+		showClusters(response['clusters']);
 	}
 
-
-	
+	if(response.hasOwnProperty('highlighting') && response.hasOwnProperty('response')) {
+		showDocs({
+			highlighting: response['highlighting'],
+			docs: response['response']['docs']
+		});
+	}
+ 
 }
 
 
@@ -76,13 +80,46 @@ function showClusters(data) {
 }
 
 
+function showDocs(data) {
 
-function showDocs() {
+	var highlighting = data['highlighting'];
+	var docs = data['docs'];
+
+
+	$('#result-list').html("");
+	for(var n=0;n<docs.length;n++) {
+
+		
+		var id = docs[n]['id'];
+		var postType = docs[n]['st_posttype'];
+		var username = docs[n]['st_displayname'];
+		
+		var docHTMLTemplate = "<div class='result-header'>" +
+									"<span class='colname-style1'>Type:</span><span class='value-style1'>"+ postType + "</span>" +
+									"<span class='colname-style1'>Username:</span> <span class='value-style1'>"+ username + "</span>" +
+					    	   "</div>";
+
+
+		var post = highlighting[id]['st_post'][0];
+
+		docHTMLTemplate += "<div class='result-content'>" + post + "</div>";
+
+		var comments = docs[n]['st_comments'];
+		
+		//comments may not be present in every document		
+		if(comments != undefined) {
+			docHTMLTemplate += "<div class='comments'>";
+			$.each(comments,function(index,comment) {
+				docHTMLTemplate += "<li>" + comment + "</li>";
+			});
+			docHTMLTemplate += "</div>";
+		}
+
+  		docHTMLTemplate = "<div class='result'>" + docHTMLTemplate + "</div>";
+
+
+  		$('#result-list').append(docHTMLTemplate);
+
+	}
 
 }
-
-
-function showResults() {
-
-}
-

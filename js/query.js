@@ -4,13 +4,14 @@ function querySolr() {
 	var params = {
 		"q" :'st_post:data',
 		"rows" : 20,
-		"fl" : "id,st_post,st_posttype,st_tags",
+		"fl" : "id,st_post,st_posttype,st_tags,st_comments,st_displayname",
 		"clustering": true,
 		"clustering.results":true,
 		"carrot.title" : "st_post",
 		"wt" : "json",
 		"facet": true,
-		"facet.limit":20000
+		"facet.limit":20000,
+		"hl":true
 	};
  
     $.ajax ({
