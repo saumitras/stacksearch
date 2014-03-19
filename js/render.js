@@ -26,6 +26,9 @@ function populateResults(response) {
 function showFacets(data) {
 	console.log(data);
 
+
+	$('#facetvalues').html("");
+
 	$.each(data,function(facetName,facetVals) {
 
 		var label = APPDATA['facets'][facetName]['label'],

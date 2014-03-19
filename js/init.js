@@ -2,6 +2,9 @@ $(document).ready(function() {
 	$('#start-date-div').datetimepicker();
 	$('#end-date-div').datetimepicker();
 	
+	$('.searchicon').click(function(){
+		querySolr();
+	});
 
 	initAutoComplete();
 	initPagination();
