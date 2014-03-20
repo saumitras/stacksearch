@@ -8,11 +8,13 @@ function querySolr() {
 	var sort = $('#sort').val();
 
 	var start = ($('#pagination').pagination('getCurrentPage') - 1) * $('#rows').val();
+	var fq = getDateFilterQuery();
 
 	var params = {
 		"q" :q,
 		"rows" : rows,
 		"fl" : "id,st_post,st_posttype,st_tags,st_comments,st_displayname",
+		"fq" : fq,
 		"clustering": true,
 		"clustering.results":true,
 		"carrot.title" : "st_post",
@@ -50,7 +52,7 @@ function getQueryParams() {
 	//get search query text
 	var searchtext = $('#querybox').val();
 	if(searchtext == "") {
-		searchtext = "data";
+		searchtext = "all";
 	}
 
 	

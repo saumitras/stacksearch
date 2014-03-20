@@ -54,8 +54,16 @@ function showFacets(data) {
 			var value = facetVals[n];
 			var count =  facetVals[(n+1)];
 
+			var checkedStr;
+			if(isFacetSeleted(facetName,value)) {
+				checkedStr = " checked='checked' ";
+			} else {
+				checkedStr = "";
+				
+			}
+
 			valueHTMLTemplate += "<li><label value='" + value + "'>" +
-										"<input type='checkbox'>" + value + " (" + count + ")" +
+										"<input type='checkbox' " + checkedStr + ">" + value + " (" + count + ")" +
 								  "</label></li>";
 		}
 
@@ -66,6 +74,17 @@ function showFacets(data) {
 	});
 
 	onFacetSelection();
+
+}
+
+
+function isFacetSeleted(facetName,value) {
+	
+	if( $('#filter-bar').find("[facetname='" + facetName + "']").filter("[value='" + value + "']").length > 0 ) {
+		return true;
+	} else {
+		return false;
+	}
 
 }
 

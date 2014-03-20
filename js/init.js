@@ -1,7 +1,17 @@
 $(document).ready(function() {
-	$('#start-date-div').datetimepicker();
-	$('#end-date-div').datetimepicker();
 	
+	onLoadBindings();
+
+	initDatePicker();
+	initAutoComplete();
+	initPagination({itemsCount:0});
+
+	startSearch();
+
+});
+
+
+function onLoadBindings() {
 	$('.searchicon').click(function(){
 		APPDATA.searchSource = "searchiconclick";
 		startSearch();
@@ -25,12 +35,7 @@ $(document).ready(function() {
 		}
 	});
 
-	initAutoComplete();
-	initPagination({itemsCount:0});
-
-	startSearch();
-
-});
+}
 
 function initAutoComplete() {
 	
@@ -64,6 +69,7 @@ function initPagination(data) {
 		cssStyle: 'light-theme'
 		
 	});
+
 
 }
 
