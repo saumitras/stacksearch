@@ -3,7 +3,7 @@ function querySolr() {
 
 //	var params = getQueryParams();
 
-	$('#status-message').html("Searching...")
+	$('#status-message').html("Searching...");
 
 	var q = getQueryParams()['q'];
 	var rows = $('#rows').val();
@@ -39,9 +39,13 @@ function querySolr() {
         jsonp: 'json.wrf',
         success : function(response) {
             populateResults(response);
+            console.log("success");
         },
-        error : function(response) {
-            console.log(response);
+        error : function() {
+        	console.log("fail");
+        	$('#status-message').html("Unable to fetch query results.")
+            //console.log(response);
+         
         }
     });
 

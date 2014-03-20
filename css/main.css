@@ -7,16 +7,26 @@ a { text-decoration: none;}
 
 
 /* header */
-#header { background-color: #CCC; height: 60px;}
-#header .logo {border: #FFF 1px solid; float: left; margin-right: 20px;}
+#header { background-color: #FFF; height: 60px; border-bottom: 2px solid #CCC;}
+#header .logo {float: left; margin-right: 20px;}
+
+.logotext {
+	color: #43C7BC;
+    margin-left: 10px;
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 15px;
+  	
+    font-family: courier new;
+}
 
 #header .toolbar { float: left;  margin-top: 10px; }
 #querybox { width: 400px; }
 #header .toolbar input { line-height: 1.8em;}
 #header .datetime-elem { width: 120px; text-align: center; }
-#header .searchicon { vertical-align: middle; width:30px; height:28px; cursor: pointer;  }
+#header .searchicon { vertical-align: middle; width:26px; height:24px; cursor: pointer;  border: 1px solid #D6C9C9; padding: 2px; }
 
-#header .links { float: right; margin: 10px 10px 0 0;  }
+#header .links { float: right; margin: 15px 10px 0 0;  }
 
 
 /* console */
