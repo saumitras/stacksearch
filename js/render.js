@@ -4,6 +4,11 @@ function populateResults(response) {
 	var qTime = response['responseHeader']['QTime'] + " ms";
 	var numFound = response['response']['numFound'];
 
+
+	if(APPDATA.searchSource != "pagination") {
+		initPagination({itemsCount:numFound});
+	}
+
 	$('#status-message').html(numFound + " matches(" + qTime +")");
 
 	if(response.hasOwnProperty('facet_counts')) {
@@ -15,8 +20,6 @@ function populateResults(response) {
 	}
 
 	if(response.hasOwnProperty('highlighting') && response.hasOwnProperty('response')) {
-
-
 
 		showDocs({
 			highlighting: response['highlighting'],
@@ -110,7 +113,8 @@ function addNewFacet(data) {
 
 	$('#filter-bar').append(filterHTMLTemplate);
 
-	querySolr();
+	APPDATA.searchSource = "facetAdded";
+	startSearch();
 
 
 
@@ -121,7 +125,9 @@ function addNewFacet(data) {
 
 		$('#facetvalues ul').filter("[facetname='" + facetname + "']").find("[value='" + value + "']").find(':checkbox').removeAttr('checked');
 		$(this).parent().remove();
-		querySolr();
+
+		APPDATA.searchSource = "facetRemovedByIconClick";
+		startSearch();
 
 	});
 
@@ -135,7 +141,8 @@ function removeFacet(data) {
 
 	$('#filter-bar').find("[facetname='"+ facetName + "']").filter("[value='" + value +"']").remove();
 
-	querySolr();
+	APPDATA.searchSource = "facetRemovedFromCheckbox";
+	startSearch();
 
 }
 
@@ -203,6 +210,11 @@ function showDocs(data) {
   		$('#result-list').append(docHTMLTemplate);
 
 	}
+
+
+	$('.result-header').bind('dblclick',function() {
+		$(this).siblings().slideToggle('fast');
+	});
 
 }
 

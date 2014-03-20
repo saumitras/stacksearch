@@ -1,4 +1,4 @@
-body {margin: 0px; padding: 0px; font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif; background-color: #F8F8F8;
+body {margin: 0px; padding: 0px; font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif; background-color: #FFF;
 		font-size:14px;		
 }
 a { text-decoration: none;}
@@ -25,16 +25,16 @@ em { background-color: #DBE232; color: #D33D3D; font-weight: bold; }
 
 
 /* left-nav */
-#left-nav { width: 250px; font-size: 12px; float: left;}
+#left-nav { width: 250px; font-size: 12px; float: left; margin-left: 10px;}
 
 #clusters ul { padding: 0 0 0 0; }
-#clusters ul li {margin: 0px 10px 0px 10px;}
+#clusters ul li {margin: 0px 10px 0px 10px; list-style: none;}
 
-#clustervalues { max-height: 100px; overflow: auto; }
+#clustervalues { max-height: 160px; overflow: auto; }
 
 #facets ul { padding: 0 0 0 0; max-height: 100px; overflow: auto;}
-#facets ul li {margin: 0px 10px 0px 10px;}
-#facets .facet-heading { font-size: 14px; margin-left: 10px;  }
+#facets ul li {margin: 0px 10px 0px 10px; list-style: none; font-size: 12px;}
+#facets .facet-heading { font-size: 14px; margin-left: 10px; font-weight: bold; color: #45B0DA; }
 
 
 
@@ -46,17 +46,20 @@ em { background-color: #DBE232; color: #D33D3D; font-weight: bold; }
 
 #status-message { background-color: #000; color: #FFF; padding: 2px 5px 2px 5px; border-radius: 10px; }
 
-#toolbar { }
+#toolbar { margin-right: 15px; }
 #pagination { float: right; }
-#result-list { margin-top: 20px; }
+#result-list { margin-top: 20px; padding-right: 20px; }
 /*#result-list .result { margin-bottom: 10px; }*/
 
 .result { padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #000; }
-.colname-style1 { font-weight: bold; margin-right: 5px; }
+.result-header { background-color: #43C7BC; padding: 5px; border-radius: 10px; color: #FFF; }
+.colname-style1 { font-weight: bold; margin-right: 5px; color: #000; }
 .value-style1 { font-weight: bold; margin-right: 10px; }
-.comments { margin-top: 10px; }
+.comments { margin-top: 10px; color: #4E92AC }
 .comments li { margin-top: 5px; font-size: 12px; }
 .result-content { margin-top: 10px;}
+
+.style1 { font-size: 20px; background-color: #302E2E; color: #F8EDED; padding: 5px; border-radius: 10px; margin-top: 15px;}
 
 
 

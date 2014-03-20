@@ -7,14 +7,6 @@
   <link href="lib/flaviusmatis-simplePagination.js/simplePagination.css" rel="stylesheet">
   
 
-  <script type="text/javascript" src='lib/jquery.min.js'></script>
-  <script type="text/javascript" src='lib/date.js'></script>
-  <script type="text/javascript" src='lib/date.format.js'></script>
-  <script type="text/javascript" src='lib/datetimepicker/jquery.datetimepicker.js'></script>
-  <script type="text/javascript" src='lib/jquery-autocomplete-master/src/jquery.autocomplete.js'></script>
-  <script type="text/javascript" src='lib/flaviusmatis-simplePagination.js/jquery.simplePagination.js'></script>
-  
-  
   <title>
     StackSearch
   </title>
@@ -49,22 +41,22 @@
   </div>
 
 
-  <div id="console">
+  <!-- <div id="console">
     <span class='query'>
       <a href="#">
        http://localhost:8983/solr/ar/select/?q=type:("SECTION" OR "SYS" OR "NA") AND NOT filename:(*do_not_show)&fq=obs_date:[2004-03-14T00:00:00Z%2D330MINUTES TO 2014-03-12T17:51:40Z%2D330MINUTES]
      </a>
    </span>
 
- </div>
-
+  </div>
+ -->
 
 
 
  <div id="left-nav"> 
 
   <div id="clusters">
-    <h1>Clusters</h1>
+    <h1 class="style1">Clusters</h1>
     <ul id="clustervalues">
 
 <!--       <li>Cluster 1 (0.0)(0.0)</li>
@@ -90,11 +82,11 @@
   </div>
 
 
-  <hr/>
+  
 
   <div id="facets">
 
-    <h1>Filters</h1>
+    <h1 class="style1">Filters</h1>
 
     <span id="facetvalues"></span>
 
@@ -144,17 +136,18 @@
 
   <!-- toolbar area to show result-found/status/pagination/sorting,etc -->
   <div id="toolbar">
-    <span id="status-message">192 results found in 876 ms</span>
-    <span id="sort">Sort
-      <select>
-        <option selected="selected">Latest</option>
-        <option>Oldest</option>
-        <option>Highest Score</option>
+    <span id="status-message">192 results found in 876 ms</span><br><br>
+    <span>Sort
+      <select id="sort">
+        <option selected="selected" value="st_creationdate desc">Latest</option>
+        <option value="st_creationdate asc">Oldest</option>
+        <option value="st_score desc">Highest Score</option>
+        <option value="st_commentcount desc">Most Comments</option>
       </select>
     </span>
 
-    <span id="rows">Rows
-      <select>
+    <span>Rows
+      <select id="rows">
         <option selected="selected">20</option>
         <option>50</option>
         <option>100</option>
@@ -199,6 +192,16 @@
 
 </div>
 
+
+
+  <script type="text/javascript" src='lib/jquery.min.js'></script>
+  <script type="text/javascript" src='lib/date.js'></script>
+  <script type="text/javascript" src='lib/date.format.js'></script>
+  <script type="text/javascript" src='lib/datetimepicker/jquery.datetimepicker.js'></script>
+  <script type="text/javascript" src='lib/jquery-autocomplete-master/src/jquery.autocomplete.js'></script>
+  <script type="text/javascript" src='lib/flaviusmatis-simplePagination.js/jquery.simplePagination.js'></script>
+  
+  
 
 
 <script type="text/javascript" src='js/config.js'></script>

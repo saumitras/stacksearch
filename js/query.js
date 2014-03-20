@@ -4,10 +4,14 @@ function querySolr() {
 //	var params = getQueryParams();
 
 	var q = getQueryParams()['q'];
+	var rows = $('#rows').val();
+	var sort = $('#sort').val();
+
+	var start = ($('#pagination').pagination('getCurrentPage') - 1) * $('#rows').val();
 
 	var params = {
 		"q" :q,
-		"rows" : 20,
+		"rows" : rows,
 		"fl" : "id,st_post,st_posttype,st_tags,st_comments,st_displayname",
 		"clustering": true,
 		"clustering.results":true,
@@ -15,7 +19,9 @@ function querySolr() {
 		"wt" : "json",
 		"facet": true,
 		"facet.limit":20000,
-		"hl":true
+		"hl":true,
+		"sort":sort,
+		"start":start
 	};
  
     $.ajax ({
@@ -99,7 +105,7 @@ function getSelectedFacets() {
 
 function showMoreLikeThis() {
 
-	
+
 
 
 }

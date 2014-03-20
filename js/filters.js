@@ -1,24 +1,5 @@
-/*function getFilters() {
-	
+function paginate() {
+	startSearch({
+		source:'pagination'
+	});
 }
-
-function getSearchText() {
-
-}
-
-function getFacets() {
-
-}
-
-function getClusterState() {
-
-}
-
-
-function getRows() {
-
-}
-
-function getSort() {
-
-}*/
