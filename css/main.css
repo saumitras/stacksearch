@@ -28,7 +28,7 @@ em { background-color: #DBE232; color: #D33D3D; font-weight: bold; }
 #left-nav { width: 250px; font-size: 12px; float: left; margin-left: 10px;}
 
 #clusters ul { padding: 0 0 0 0; }
-#clusters ul li {margin: 0px 10px 0px 10px; list-style: none;}
+#clusters ul li {margin: 0px 10px 0px 10px; list-style: none; margin-bottom: 2px;}
 
 #clustervalues { max-height: 160px; overflow: auto; }
 
@@ -59,7 +59,7 @@ em { background-color: #DBE232; color: #D33D3D; font-weight: bold; }
 .comments li { margin-top: 5px; font-size: 12px; }
 .result-content { margin-top: 10px;}
 
-.style1 { font-size: 20px; background-color: #302E2E; color: #F8EDED; padding: 5px; border-radius: 10px; margin-top: 15px;}
+.style1 { font-size: 20px; background-color: #CCC; color: #000; padding: 5px; border-radius: 10px; margin-top: 15px;}
 
 
 

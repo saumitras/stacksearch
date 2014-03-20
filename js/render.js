@@ -157,9 +157,9 @@ function showClusters(data) {
 		var count = cluster['docs'].length; //number of docs in result set which belong to that cluster
 
 		valueHTMLTemplate += "<li>" + 
-								label +
-								"[" + count + "]" +
-								" ("+score+")" +
+								"<b>" + label + "</b> " +
+								"[" + count + " docs]" +
+								" ("+ score.toFixed(2) +")" +
 							 "</li>";
 
 		
