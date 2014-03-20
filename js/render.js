@@ -126,7 +126,7 @@ function addNewFacet(data) {
 
 	var filterHTMLTemplate = "<span class='filter' value='" + value + "' facetname='" + facetName + "'>" + 
 								value + 
-								"<img src='img/close1.png' /> |" +
+								"<img src='img/close2_16.png' /> |" +
 							 "</span>";
 
 
@@ -210,7 +210,13 @@ function showDocs(data) {
 
 		var post = highlighting[id]['st_post'][0];
 
-		docHTMLTemplate += "<div class='result-content'>" + post + "</div>";
+		//if search query is empty, then remove the highlighting....user is in browsing mode
+		if($('#querybox').val() == "") {
+			post = post.replace(/<em>/g,'');
+			post = post.replace(/<\/em>/g,'');
+		}
+
+		docHTMLTemplate += "<div class='result-content highlight'>" + post + "</div>";
 
 		var comments = docs[n]['st_comments'];
 		
@@ -230,7 +236,10 @@ function showDocs(data) {
 
 	}
 
-
+	/*if($('#querybox').val() == "") {
+		$('#result-list').find('.result-content').removeClass('highlight');
+	}
+*/
 	$('.result-header').bind('dblclick',function() {
 		$(this).siblings().slideToggle('fast');
 	});

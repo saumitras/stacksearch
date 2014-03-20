@@ -3,6 +3,8 @@ function querySolr() {
 
 //	var params = getQueryParams();
 
+	$('#status-message').html("Searching...")
+
 	var q = getQueryParams()['q'];
 	var rows = $('#rows').val();
 	var sort = $('#sort').val();
@@ -23,12 +25,13 @@ function querySolr() {
 		"facet.limit":20000,
 		"hl":true,
 		"sort":sort,
-		"start":start
+		"start":start,
+		"defType":"edismax"
 	};
  
     $.ajax ({
         
-        url : "http://localhost:8983/solr/collection1/stacksearch",
+        url : "http://192.168.1.36:8983/solr/collection1/stacksearch",
         type : 'GET',
        	//data : encodeURIComponent(JSON.stringify(params)),
         data : params,
@@ -52,11 +55,13 @@ function getQueryParams() {
 	//get search query text
 	var searchtext = $('#querybox').val();
 	if(searchtext == "") {
-		searchtext = "all";
+		queryString = "st_post:(*)";
+	} else {
+		queryString = "st_post:(\"" + searchtext + "\")";
 	}
 
 	
-	var queryString = "st_post:(\"" + searchtext + "\")";
+	//var queryString = "st_post:(\"" + searchtext + "\")";
 
 	var facetQueryString = getFacetQueryString();
 	if(facetQueryString != "") {
