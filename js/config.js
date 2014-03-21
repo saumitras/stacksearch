@@ -16,6 +16,8 @@ var APPDATA = {
 			label: "USERNAME"
 		}
 	},
+	"SOLR_HOST":"localhost",
+	"SOLR_PORT":"8983",
 	showClusters:0,
 	showComments:0
 

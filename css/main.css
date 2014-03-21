@@ -10,9 +10,7 @@ a { text-decoration: none;}
 #header { background-color: #FFF; height: 60px; border-bottom: 2px solid #CCC;}
 #header .logo {float: left; margin-right: 20px;}
 
-.logotext {
-	color: #43C7BC;
-    margin-left: 10px;
+.logotext { color: #43C7BC;   margin-left: 10px;
     font-size: 26px;
     font-weight: bold;
     margin-top: 15px;

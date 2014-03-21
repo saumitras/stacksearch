@@ -31,7 +31,7 @@ function querySolr() {
  
     $.ajax ({
         
-        url : "http://192.168.1.36:8983/solr/collection1/stacksearch",
+        url : "http://" + APPDATA.SOLR_HOST + ":" + APPDATA.SOLR_PORT + "/solr/collection1/stacksearch",
         type : 'GET',
        	//data : encodeURIComponent(JSON.stringify(params)),
         data : params,
