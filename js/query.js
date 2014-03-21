@@ -1,4 +1,3 @@
-
 function querySolr() {
 
 //	var params = getQueryParams();
@@ -12,11 +11,13 @@ function querySolr() {
 	var start = ($('#pagination').pagination('getCurrentPage') - 1) * $('#rows').val();
 	var fq = getDateFilterQuery();
 
+
 	var params = {
 		"q" :q,
 		"rows" : rows,
-		"fl" : "id,st_post,st_posttype,st_tags,st_comments,st_displayname",
+		"fl" : "id,st_post,st_posttype,st_tags,st_comments,st_displayname,st_score,st_title",
 		"fq" : fq,
+		"qf" : "st_post",
 		"clustering": true,
 		"clustering.results":true,
 		"carrot.title" : "st_post",
@@ -33,18 +34,16 @@ function querySolr() {
         
         url : "http://" + APPDATA.SOLR_HOST + ":" + APPDATA.SOLR_PORT + "/solr/collection1/stacksearch",
         type : 'GET',
-       	//data : encodeURIComponent(JSON.stringify(params)),
         data : params,
         dataType : 'jsonp',
         jsonp: 'json.wrf',
         success : function(response) {
             populateResults(response);
-            console.log("success");
+            
         },
-        error : function() {
-        	console.log("fail");
+        fail : function() {
         	$('#status-message').html("Unable to fetch query results.")
-            //console.log(response);
+
          
         }
     });
@@ -58,15 +57,16 @@ function getQueryParams() {
 
 	//get search query text
 	var searchtext = $('#querybox').val();
-	if(searchtext == "") {
+
+	var queryString;
+	if(searchtext == "" || searchtext == "*") {
 		queryString = "st_post:(*)";
 	} else {
-		queryString = "st_post:(\"" + searchtext + "\")";
+		//queryString = "st_post:(\"" + searchtext + "\")";
+		queryString = "st_post:" + searchtext + " ";
 	}
 
 	
-	//var queryString = "st_post:(\"" + searchtext + "\")";
-
 	var facetQueryString = getFacetQueryString();
 	if(facetQueryString != "") {
 		queryString += " AND " + facetQueryString;

@@ -50,7 +50,7 @@ a { text-decoration: none;}
 #right-nav { margin-left: 280px; margin-top: 20px; }
 #filter-bar { margin-bottom: 20px; }
 /*image in the facet filter bar*/
-#filter-bar .filter { margin-right: 3px; }
+#filter-bar .filter { margin-right: 3px; color: #AC1515; font-weight: bold; }
 #filter-bar .filter img {  height: 12px; width: 12px; cursor: pointer; margin-left: 3px; } 
 
 #status-message { background-color: #000; color: #FFF; padding: 2px 5px 2px 5px; border-radius: 10px; }

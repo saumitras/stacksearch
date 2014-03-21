@@ -1,24 +1,31 @@
 function populateResults(response) {
 	console.log(response);
 
+	//show time taken by query and number of results found
 	var qTime = response['responseHeader']['QTime'] + " ms";
 	var numFound = response['response']['numFound'];
+	$('#status-message').html(numFound + " matches(" + qTime +")");
 
 
+	//change the pagination depending on number of results found and results-per-page
 	if(APPDATA.searchSource != "pagination") {
 		initPagination({itemsCount:numFound});
 	}
 
-	$('#status-message').html(numFound + " matches(" + qTime +")");
-
+	
+	//show facet response
 	if(response.hasOwnProperty('facet_counts')) {
 		showFacets(response['facet_counts']['facet_fields']);
 	}
 
+	
+	//show cluster response
 	if(response.hasOwnProperty('clusters')) {
 		showClusters(response['clusters']);
 	}
 
+
+	//show result documents using highlighting response
 	if(response.hasOwnProperty('highlighting') && response.hasOwnProperty('response')) {
 
 		showDocs({
@@ -32,11 +39,10 @@ function populateResults(response) {
 
 /*
 	this will populate the facets list.
-	the facet which is selected at present will not be refreshed....selected facet will be stored in APPDATA.selectedFacet
+	TODO - facet which is selected at present should not be refreshed....selected facet will be stored in APPDATA.selectedFacet
 */
 function showFacets(data) {
 	//console.log(data);
-
 
 	$('#facetvalues').html("");
 
@@ -116,7 +122,10 @@ function onFacetSelection() {
 }
 
 
-/* add the selected facet on the filter bar */
+
+/* 
+	add the selected facet on the filter bar 
+*/
 function addNewFacet(data) {
 
 	console.log(data);
@@ -165,6 +174,9 @@ function removeFacet(data) {
 
 }
 
+
+
+
 function showClusters(data) {
 
 	var valueHTMLTemplate = "";
@@ -188,6 +200,12 @@ function showClusters(data) {
 }
 
 
+
+
+/*
+ this will show the main result list...notice that its using highlighting respone....id field is used for mapping
+*/
+
 function showDocs(data) {
 
 	var highlighting = data['highlighting'];
@@ -198,9 +216,15 @@ function showDocs(data) {
 	for(var n=0;n<docs.length;n++) {
 
 		
+		//first get required fields from doc response
 		var id = docs[n]['id'];
 		var postType = docs[n]['st_posttype'];
 		var username = docs[n]['st_displayname'];
+
+		//username is undefined for community posts
+		if(username == undefined) {
+			username = "Commnunity";
+		}
 		
 		var docHTMLTemplate = "<div class='result-header'>" +
 									"<span class='colname-style1'>Type:</span><span class='value-style1'>"+ postType + "</span>" +
@@ -208,10 +232,15 @@ function showDocs(data) {
 					    	   "</div>";
 
 
+		//use id field to get snippets from highlighting response.....for the sake of simplicity, we have made snippet count 1...
+		//in real world cases you will get multiple snippets per id
+
 		var post = highlighting[id]['st_post'][0];
 
-		//if search query is empty, then remove the highlighting....user is in browsing mode
-		if($('#querybox').val() == "") {
+
+
+		//if search query is empty, then remove the highlighting(user is in browsing mode), or else it will highlight whole content
+		if($('#querybox').val() == "" || $('#querybox').val() == "*" ) {
 			post = post.replace(/<em>/g,'');
 			post = post.replace(/<\/em>/g,'');
 		}
@@ -236,14 +265,8 @@ function showDocs(data) {
 
 	}
 
-	/*if($('#querybox').val() == "") {
-		$('#result-list').find('.result-content').removeClass('highlight');
-	}
-*/
 	$('.result-header').bind('dblclick',function() {
 		$(this).siblings().slideToggle('fast');
 	});
 
 }
-
-

@@ -35,6 +35,11 @@ function onLoadBindings() {
 		}
 	});
 
+
+	$('#clusters').find('.clusterheading').bind('dblclick',function() {
+		$('#clustervalues').slideToggle('fast');
+	});
+
 }
 
 function initAutoComplete() {
