@@ -1,3 +1,5 @@
+var termRequest, searchRequest;
+
 function querySolr() {
 
 //	var params = getQueryParams();
@@ -30,7 +32,12 @@ function querySolr() {
 		"defType":"edismax"
 	};
  
-    $.ajax ({
+
+ 	if(searchRequest) {
+		searchRequest.abort();
+	}
+	
+    searchRequest = $.ajax ({
         
         url : "http://" + APPDATA.SOLR_HOST + ":" + APPDATA.SOLR_PORT + "/solr/collection1/stacksearch",
         type : 'GET',
@@ -114,9 +121,49 @@ function getSelectedFacets() {
 
 
 
-function showMoreLikeThis() {
+function getAutoComplete() {
 
+//	var u1 = "http://localhost:8983/solr/collection1/terms?terms.fl=st_post&terms.prefix=da"
+	//var url : "http://" + APPDATA.SOLR_HOST + ":" + APPDATA.SOLR_PORT + "/solr/collection1/terms",
+	var u1 = "http://localhost:8983/solr/collection1/terms";
 
+	var keyword = $("#querybox").val();
+
+	keyword = keyword.replace(/.*? /,'');
+
+	console.log("keword= " + keyword);
+
+	var params = {
+		"terms.fl" : "st_post",
+		"terms.prefix" : keyword,
+		"wt":"json"
+	};
+
+	if(termRequest) {
+		termRequest.abort();
+	}
+
+	termRequest = $.ajax ({
+        url : u1,
+        type : 'GET',
+        data : params,
+        dataType : 'jsonp',
+        jsonp: 'json.wrf',
+
+        success : function(response) {
+        	console.log(response);
+            var terms = response.terms.st_post;
+
+            var list = [];
+
+            for(var i=0;i<terms.length;i=i+2) {
+            	list.push([terms[i]]);
+        	}
+
+        	//initAutoComplete(list.join("','"));
+        	initAutoComplete(list);
+        }
+    });
 
 
 }

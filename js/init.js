@@ -33,6 +33,10 @@ function onLoadBindings() {
 			APPDATA.searchSource = "queryboxKeyup";
 			startSearch();
 		}
+
+		if(e.keyCode >= 48 && e.keyCode <=90) {
+			getAutoComplete();
+		}
 	});
 
 
@@ -42,17 +46,15 @@ function onLoadBindings() {
 
 }
 
-function initAutoComplete() {
+function initAutoComplete(data) {
 	
-	$("#querybox").autocomplete({data: [
-		['apple', 1],
-		['apricot', 2],
-		['apple my' , 3],
-		['apple 4', 4],
-		['apple shake', 5]
-		],
+	if(data == undefined) {
+		data = [];
+	}
+
+	$("#querybox").autocomplete({data: data,
 		mustMatch: false,
-		maxItemsToShow: 5,
+		maxItemsToShow: 20,
 		selectFirst: false,
 		autoFill: false,
 		selectOnly: true
@@ -62,6 +64,7 @@ function initAutoComplete() {
 
 
 function initPagination(data) {
+
 
 	if(data.pageNumber == undefined) {
 		data.pageNumber = 1;

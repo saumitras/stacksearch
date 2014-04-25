@@ -181,22 +181,39 @@ function showClusters(data) {
 
 	var valueHTMLTemplate = "";
 
+	$('#clustervalues').html("");
 	$.each(data,function(index,cluster) {
 
 		var label = cluster['labels'][0];
 		var score = cluster['score'];  //the health of that cluster
-		var count = cluster['docs'].length; //number of docs in result set which belong to that cluster
+		var docs = cluster['docs'];
+		var count = docs.length; //number of docs in result set which belong to that cluster
 
-		valueHTMLTemplate += "<li>" + 
+		var valueHTMLTemplate = "<li>" + 
 								"<b>" + label + "</b> " +
 								"[" + count + " docs]" +
 								" ("+ score.toFixed(2) +")" +
 							 "</li>";
 
-		
+		$('#clustervalues').append(valueHTMLTemplate);
+
+
+		//on click of a cluster, minimize all posts which dont belong to that cluster
+		$('#clustervalues').find('li').last().bind('click',function() {
+
+			$('#result-list').find('.result-header').dblclick();
+			$.each(docs,function(index,id) {
+				console.log(id);
+				$('#result-list').find('.' + id).find('.result-header').dblclick();
+			});
+
+		});
+
+
+
 	});
 
-	$('#clustervalues').html(valueHTMLTemplate);
+	
 }
 
 
@@ -220,6 +237,7 @@ function showDocs(data) {
 		var id = docs[n]['id'];
 		var postType = docs[n]['st_posttype'];
 		var username = docs[n]['st_displayname'];
+		var score = docs[n]['st_score'];
 
 		//username is undefined for community posts
 		if(username == undefined) {
@@ -229,6 +247,7 @@ function showDocs(data) {
 		var docHTMLTemplate = "<div class='result-header'>" +
 									"<span class='colname-style1'>Type:</span><span class='value-style1'>"+ postType + "</span>" +
 									"<span class='colname-style1'>Username:</span> <span class='value-style1'>"+ username + "</span>" +
+									"<span class='colname-style1'>Score:</span> <span class='value-style1'>"+ score + "</span>" +
 					    	   "</div>";
 
 
@@ -262,6 +281,7 @@ function showDocs(data) {
 
 
   		$('#result-list').append(docHTMLTemplate);
+  		$('#result-list').find('.result').last().addClass(id);
 
 	}
 
