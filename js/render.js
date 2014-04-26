@@ -6,6 +6,9 @@ function populateResults(response) {
 	var numFound = response['response']['numFound'];
 	$('#status-message').html(numFound + " matches(" + qTime +")");
 
+	if(numFound == 0) {
+		chart = new Highcharts.Chart(chartOptions);
+	}
 
 	//change the pagination depending on number of results found and results-per-page
 	if(APPDATA.searchSource != "pagination") {

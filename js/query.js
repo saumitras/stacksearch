@@ -41,6 +41,9 @@ function querySolr() {
 		searchRequest.abort();
 	}
 	
+
+	chart.showLoading();
+		
     searchRequest = $.ajax ({
         
         url : "http://" + APPDATA.SOLR_HOST + ":" + APPDATA.SOLR_PORT + "/solr/collection1/stacksearch",

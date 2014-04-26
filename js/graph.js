@@ -2,7 +2,9 @@ var chart;
 
 var chartOptions =  {
     credits: false,
-    colors: ["#666666"],
+    //colors: ["#666666"],
+    colors: ["#43C7BC"],
+    
     chart: {
         renderTo: 'chartDiv',
         type: 'column'
@@ -53,7 +55,7 @@ var chartOptions =  {
             point: {
                 events: {
                     click: function() {
-                        alert ('Category: '+ this.category +', value: '+ this.y);
+                        alert ('Name: '+ this.name +', value: '+ this.y);
                     }
                 }
             }
@@ -81,12 +83,16 @@ function initChart() {
 var graphData = [];
 
 function populateChart(params) {
-
+    
+    
+    chart.hideLoading();
+    
     var gap = params['gap'];
 
-    var data = params['counts'];
+    var solrData = params['counts'];
+    console.log(solrData);
 
-    if(data.count == 0) {
+    if(solrData.length == 0) {
         //TODO - clear the graph
         return;
     }
@@ -95,24 +101,46 @@ function populateChart(params) {
 
     graphData= [];
 
+
+    var tempHash = {};
+
     if(gap.match(/YEAR/)) {
 
         var startYear = dates.start.year;
         var endYear = dates.end.year;
 
-        for(var i=startYear;i<=endYear;i++) {
-            graphData.push([i.toString(),100]);
+        while(startYear<=endYear) {
+            tempHash[startYear.toString()]  = 0;
+            startYear++;
         }
 
+        
+        for(var i=0;i<solrData.length;i=i+2){
+            var value = solrData[i];
+            var year = value.replace(/\-.*/,'');
+            var count = solrData[i+1];
+        
+            tempHash[year.toString()] = count;
+
+
+        }
+
+        graphData = hashToArray(tempHash);
     }
 
-
-    console.log(graphData);
 
     chart.series[0].setData(graphData,true);
 
 }
 
+
+function hashToArray(tempHash) {
+    var arr = [];
+    $.each(tempHash,function(key,value) {
+        arr.push([key,+value]);
+    });
+    return arr;
+}
 
 function getPluginDates() {
 
@@ -152,3 +180,8 @@ function getPluginDates() {
 
 
 
+function graphOnClick(params) {
+    var gap = params.gap;
+    var label = params.label;
+
+}
