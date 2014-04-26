@@ -48,6 +48,9 @@ a { text-decoration: none;}
 
 /* right-nav */
 #right-nav { margin-left: 280px; margin-top: 20px; }
+
+#chartDiv { height: 200px; width: 90%; }
+
 #filter-bar { margin-bottom: 20px; }
 /*image in the facet filter bar*/
 #filter-bar .filter { margin-right: 3px; color: #AC1515; font-weight: bold; }

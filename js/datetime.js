@@ -7,7 +7,7 @@ function initDatePicker() {
 	});
 
 	
-	$('#start-date-div').val("2001-01-01 00:00");
+	$('#start-date-div').val("2008-01-01 00:00");
 	$('#end-date-div').val("2014-03-21 23:23");
 	
 }

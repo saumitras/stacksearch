@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	
+	initChart();
+	
 	onLoadBindings();
 
 	initDatePicker();

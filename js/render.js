@@ -16,6 +16,7 @@ function populateResults(response) {
 	//show facet response
 	if(response.hasOwnProperty('facet_counts')) {
 		showFacets(response['facet_counts']['facet_fields']);
+		populateChart(response['facet_counts']['facet_ranges']['st_creationdate']);
 	}
 
 	
