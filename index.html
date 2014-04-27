@@ -14,6 +14,10 @@
 </head>
 
 <body>
+  
+  <div id="error-notification">
+    <b>[Invalid Operation]:</b> You cannot drilldown any further. You are already vieweing chart for deepest MINUTE view.
+  </div>
 
   <div id='header'>
 
@@ -106,6 +110,10 @@
       </select>
     </span>
 
+    <span id='clearTime'>
+      <input type="button" value="Reset Time" />
+    </span>
+
     <span id='pagination'></span>
 
   </div>
@@ -117,7 +125,9 @@
   </div>
 
 
+
 </div>
+
 
 
 
@@ -128,8 +138,7 @@
 <script type="text/javascript" src='lib/jquery-autocomplete-master/src/jquery.autocomplete.js'></script>
 <script type="text/javascript" src='lib/flaviusmatis-simplePagination.js/jquery.simplePagination.js'></script>
 <script src="lib/highchart/highcharts.js"></script>
-<!-- <script src="lib/highchart/drilldown.js"></script> -->
-<script src="http://code.highcharts.com/modules/no-data-to-display.js"></script>
+<script src="lib/highchart/no-data-to-display.js"></script>
 
 <!-- <script type="text/javascript" src='js/theme2.js'></script> -->  
 <script type="text/javascript" src='js/config.js'></script>
@@ -141,6 +150,8 @@
 
 <script type="text/javascript" src='js/init.js'></script>
 
+<!-- http://www.minijs.com/plugins/8/notification#usage -->
+<script type="text/javascript" src='lib/miniNotification.js'></script>
 
 
 </body>

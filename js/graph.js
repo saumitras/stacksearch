@@ -3,16 +3,31 @@ var chart;
 var monthMapper = {
     1:"Jan",
     2:"Feb",
-    3:"March",
-    4:"April",
+    3:"Mar",
+    4:"Apr",
     5:"May",
-    6:"June",
-    7:"July",
+    6:"Jun",
+    7:"Jul",
     8:"Aug",
     9:"Sep",
     10:"Oct",
     11:"Nov",
     12:"Dec"
+};
+
+var reverseMonthMapper = {
+    "Jan":1,
+    "Feb":2,
+    "Mar":3,
+    "Apr":4,
+    "May":5,
+    "Jun":6,
+    "Jul":7,
+    "Aug":8,
+    "Sep":9,
+    "Oct":10,
+    "Nov":11,
+    "Dec":12
 };
 
 var chartOptions =  {
@@ -25,7 +40,12 @@ var chartOptions =  {
         type: 'column'
     },
     title: {
-        text: ''
+        text: '',
+        style: {
+         color: '#000',
+         //textTransform: 'uppercase',
+         fontSize: '14px'
+      }
     },
     xAxis: {
         type: 'category',
@@ -33,7 +53,7 @@ var chartOptions =  {
             rotation: -45,
             align: 'right',
             style: {
-                fontSize: '11px',
+                fontSize: '10px',
                 fontFamily: 'Verdana, sans-serif'
             }
         }
@@ -92,6 +112,11 @@ var chartOptions =  {
 function initChart() {
 
     chart = new Highcharts.Chart(chartOptions);
+}
+
+function updateChart(data) {
+    chartOptions.series[0].data = data;
+    chart = new Highcharts.Chart(chartOptions);   
 }
 
 
@@ -159,6 +184,7 @@ function populateChart(params) {
             tempHash[year.toString()] = count;
         }
 
+        chartOptions['title']['text'] = "";
         
     } else if(gap.match(/MONTH/)) {
 
@@ -170,18 +196,88 @@ function populateChart(params) {
         for(var i=0;i<solrData.length;i=i+2){
             var value = solrData[i];
             var year = getComponentsFromSolrDate(value)['year'];
-            var month = monthMapper[getComponentsFromSolrDate(value)['month']];
+            var month = monthMapper[+(getComponentsFromSolrDate(value)['month'])];
 
             var count = solrData[i+1];
         
             tempHash[startYear+"-"+month] = count;
         }
 
+        chartOptions['title']['text'] = "";
 
-    }
+    } else if(gap.match(/DAY/)) {
+        
+        var startYear = dates.start.year;
+        var startMonth = dates.start.month;
+        
+        for(var i=1;i<=daysInMonth(startYear,+startMonth);i++) {
+            tempHash[startYear + "-" + monthMapper[+startMonth] + "-" + pad(i)] = 0;
+        }
+
+        for(var i=0;i<solrData.length;i=i+2){
+            var value = solrData[i];
+            var year = getComponentsFromSolrDate(value)['year'];
+            var month = monthMapper[+(getComponentsFromSolrDate(value)['month'])];
+            var day = getComponentsFromSolrDate(value)['day'];
+
+            var count = solrData[i+1];
+        
+            tempHash[startYear+"-"+month + "-" + day] = count;
+        }        
+
+        chartOptions['title']['text'] = "";
+
+    } else if(gap.match(/HOUR/)) {
+
+        var startYear = dates.start.year;
+        var startMonth = dates.start.month;
+        var startDay = dates.start.day;
+        
+        for(var i=0;i<=23;i++) {
+            tempHash[pad(i) + ":00"] = 0;
+        }
+
+        
+        for(var i=0;i<solrData.length;i=i+2){
+            var value = solrData[i];
+           
+            var hour = getComponentsFromSolrDate(value)['hour'];
+            var count = solrData[i+1];
+        
+            tempHash[pad(+hour) + ":00"] = count;
+        }    
+
+         chartOptions['title']['text'] = "Hourly view of " + startYear + "-" + monthMapper[+startMonth] + "-" + pad(startDay);
+
+    } else if(gap.match(/MINUTE/)) {
+
+        var startYear = dates.start.year;
+        var startMonth = dates.start.month;
+        var startDay = dates.start.day;
+        var startHour = dates.start.hour;
+        
+        for(var i=0;i<=59;i++) {
+            tempHash[startHour + ":" + pad(i)] = 0;
+        }
+
+        
+        for(var i=0;i<solrData.length;i=i+2){
+            var value = solrData[i];
+           
+            var min = getComponentsFromSolrDate(value)['min'];
+            var count = solrData[i+1];
+        
+            tempHash[startHour + ":" + pad(+min)] = count;
+        }    
+
+        chartOptions['title']['text'] = "Minutes view of " + startYear + "-" + monthMapper[+startMonth] + "-" + pad(startDay) + " - " + startHour + ":00 hour" ;
+    } 
+
+
 
     graphData = hashToArray(tempHash);
-    chart.series[0].setData(graphData,true);
+    // chart.series[0].setData(graphData,true);
+    updateChart(graphData);
 
 }
 
@@ -250,6 +346,9 @@ function getPluginDates() {
 
 function graphOnClick(params) {
     //var gap = params.gap;
+
+    $('#clearTime').show();
+
     var label = params.label;
     
     var startDate,endDate;
@@ -260,14 +359,61 @@ function graphOnClick(params) {
     }  else if(gap.match(/MONTH/)) {
 
         var year = label.replace(/\-.*/,'');
-        var month = label.replace(/.*\-/,'');
+        var month = pad(reverseMonthMapper[label.replace(/.*\-/,'')]);
 
-        startDate = label + "-01-01 00:00";
-        endDate = label + "-12-31 23:23";
+        startDate = year + "-" + month + "-01 00:00";
+        endDate = year + "-" + month + "-31 23:59";
+
+    } else if(gap.match(/DAY/)) {
+
+        var year = label.match(/(\d+)\-(\w+)\-(\d+)/)[1];
+        var month = pad(reverseMonthMapper[label.match(/(\d+)\-(\w+)\-(\d+)/)[2]]);
+        var day = label.match(/(\d+)\-(\w+)\-(\d+)/)[3];
+
+        startDate = year + "-" + month + "-" + day + " 00:00";
+        endDate = year + "-" + month + "-" + day + " 23:59";
+
+
+    } else if(gap.match(/HOUR/)) {
+        
+        //in this case label will be HH:MM like 23:00
+        var hour = label.replace(/:.*/,'');
+
+        //change default label, get year, month and day from chart title
+        label =  chartOptions['title']['text'].replace("Hourly view of ");
+        var year = label.match(/(\d+)\-(\w+)\-(\d+)/)[1];
+        var month = pad(reverseMonthMapper[label.match(/(\d+)\-(\w+)\-(\d+)/)[2]]);
+        var day = label.match(/(\d+)\-(\w+)\-(\d+)/)[3];
+
+
+        startDate = year + "-" + month + "-" + day + " " + hour + ":00";
+        endDate = year + "-" + month + "-" + day + " " + hour + ":59";
+
+    } else {
+        $('#error-notification').html("<b>[Invalid Operation]:</b> You cannot drilldown any further. You are already vieweing chart for deepest MINUTE view.");
+        $('#error-notification').miniNotification();
+        return;
     }
 
     changeDateInPlugin({startDate:startDate, endDate:endDate});
 
     startSearch();
 
+}
+
+
+
+function pad(i) {
+    i = +i;
+    if(i>=10) {
+        return i.toString();
+    } else {
+        return "0" + i.toString();
+    }
+
+}
+
+
+function daysInMonth(year, month) {
+    return new Date(year, month, 0).getDate();
 }

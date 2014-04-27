@@ -29,6 +29,12 @@ function onLoadBindings() {
 		startSearch();
 	});
 
+	$('#clearTime').click(function(){
+		$('#start-date-div').val(APPDATA.startDate);
+		$('#end-date-div').val(APPDATA.endDate);	
+		$('#clearTime').hide();
+		startSearch();
+	});
 
 	$('#querybox').bind('keyup', function(e){
 		if(e.keyCode == 13) {

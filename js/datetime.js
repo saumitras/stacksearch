@@ -7,8 +7,8 @@ function initDatePicker() {
 	});
 
 	
-	$('#start-date-div').val("2012-01-01 00:00");
-	$('#end-date-div').val("2012-12-12 23:23");
+	$('#start-date-div').val(APPDATA.startDate);
+	$('#end-date-div').val(APPDATA.endDate);
 	
 }
 
