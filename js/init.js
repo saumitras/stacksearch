@@ -65,7 +65,8 @@ function initAutoComplete(data) {
 		maxItemsToShow: 20,
 		selectFirst: false,
 		autoFill: false,
-		selectOnly: true
+		selectOnly: true,
+		minChars: 1
 	});
 
 }

@@ -390,7 +390,7 @@ function graphOnClick(params) {
         endDate = year + "-" + month + "-" + day + " " + hour + ":59";
 
     } else {
-        $('#error-notification').html("<b>[Invalid Operation]:</b> You cannot drilldown any further. You are already vieweing chart for deepest MINUTE view.");
+        $('#error-notification').html("<b>[Invalid Operation]:</b> You cannot drilldown any further. You are already vieweing chart in deepest MINUTE view.");
         $('#error-notification').miniNotification();
         return;
     }

@@ -36,7 +36,7 @@ a { text-decoration: none;}
 #left-nav { width: 250px; font-size: 12px; float: left; margin-left: 10px;}
 
 #clusters ul { padding: 0 0 0 0; }
-#clusters ul li {margin: 0px 10px 0px 10px; list-style: none; margin-bottom: 2px; }
+#clusters ul li {margin: 0px 10px 0px 10px; list-style: none; margin-bottom: 2px; cursor: pointer; }
 
 #clustervalues { max-height: 160px; overflow: auto; }
 
@@ -49,7 +49,7 @@ a { text-decoration: none;}
 /* right-nav */
 #right-nav { margin-left: 280px; margin-top: 20px; }
 
-#chartDiv { height: 200px; width: 90%; }
+#chartDiv { height: 200px; width: 97%; margin-top: 10px; }
 
 #filter-bar { margin-bottom: 20px; }
 /*image in the facet filter bar*/
@@ -87,4 +87,12 @@ a { text-decoration: none;}
 	z-index: 9999;
 }
 
-#clearTime { display: none; }
+#clearTime { 
+	display: none; 
+	background-color: #DF5D5D;
+	color: #FFF;
+	padding: 2px 5px 2px;
+	font-size: 12px;
+	border: 1px solid #000;
+	cursor: pointer;
+}

@@ -15,9 +15,7 @@
 
 <body>
   
-  <div id="error-notification">
-    <b>[Invalid Operation]:</b> You cannot drilldown any further. You are already vieweing chart for deepest MINUTE view.
-  </div>
+  <div id="error-notification"></div>
 
   <div id='header'>
 
@@ -30,7 +28,7 @@
     </div>
 
     <div class="toolbar">
-      <input type="text" value="" placeholder='Search...' id="querybox" />
+      <input type="text" value="" placeholder='Start typing for suggestions...' id="querybox" />
 
       <input type="text" id="start-date-div" class="datetime-elem"  />
       <input type="text" id="end-date-div"  class="datetime-elem" />
@@ -49,7 +47,7 @@
   <!-- <div id="console">
     <span class='query'>
       <a href="#">
-       http://localhost:8983/solr/ar/select/?q=type:("SECTION" OR "SYS" OR "NA") AND NOT filename:(*do_not_show)&fq=obs_date:[2004-03-14T00:00:00Z%2D330MINUTES TO 2014-03-12T17:51:40Z%2D330MINUTES]
+       http://localhost:8983/solr/stacksearch/select/?q=type:("SECTION")
      </a>
    </span>
 
@@ -61,7 +59,7 @@
  <div id="left-nav"> 
 
   <div id="clusters">
-    <h1 class="style1 clusterheading">Clusters</h1>
+    <h1 class="style1 clusterheading" title="Double click to toggle">Clusters</h1>
     <ul id="clustervalues">
 
     </ul>
@@ -111,7 +109,8 @@
     </span>
 
     <span id='clearTime'>
-      <input type="button" value="Reset Time" />
+      <!-- <input type="button" value="Reset Time" /> -->
+      Reset Time
     </span>
 
     <span id='pagination'></span>

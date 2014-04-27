@@ -133,9 +133,9 @@ function getSelectedFacets() {
 
 function getAutoComplete() {
 
-//	var u1 = "http://localhost:8983/solr/collection1/terms?terms.fl=st_post&terms.prefix=da"
-	//var url : "http://" + APPDATA.SOLR_HOST + ":" + APPDATA.SOLR_PORT + "/solr/collection1/terms",
-	var u1 = "http://localhost:8983/solr/collection1/terms";
+	//var u1 = "http://localhost:8983/solr/collection1/terms?terms.fl=st_post&terms.prefix=da"
+	var url = "http://" + APPDATA.SOLR_HOST + ":" + APPDATA.SOLR_PORT + "/solr/" + APPDATA.collection.primary + "/terms";
+	
 
 	var keyword = $("#querybox").val();
 
@@ -154,7 +154,7 @@ function getAutoComplete() {
 	}
 
 	termRequest = $.ajax ({
-        url : u1,
+        url : url,
         type : 'GET',
         data : params,
         dataType : 'jsonp',

@@ -7,6 +7,7 @@ function populateResults(response) {
 	$('#status-message').html(numFound + " matches(" + qTime +")");
 
 	if(numFound == 0) {
+		chartOptions.series[0].data = [];
 		chart = new Highcharts.Chart(chartOptions);
 	}
 
@@ -193,7 +194,8 @@ function showClusters(data) {
 		var docs = cluster['docs'];
 		var count = docs.length; //number of docs in result set which belong to that cluster
 
-		var valueHTMLTemplate = "<li>" + 
+		var titleText = "Click to only show docs belonging to cluster '" + label +"' ";
+		var valueHTMLTemplate = "<li title=\"" + titleText + "\" >" + 
 								"<b>" + label + "</b> " +
 								"[" + count + " docs]" +
 								" ("+ score.toFixed(2) +")" +
