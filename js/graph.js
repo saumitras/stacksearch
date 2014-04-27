@@ -1,5 +1,20 @@
 var chart;
 
+var monthMapper = {
+    1:"Jan",
+    2:"Feb",
+    3:"March",
+    4:"April",
+    5:"May",
+    6:"June",
+    7:"July",
+    8:"Aug",
+    9:"Sep",
+    10:"Oct",
+    11:"Nov",
+    12:"Dec"
+};
+
 var chartOptions =  {
     credits: false,
     //colors: ["#666666"],
@@ -55,7 +70,8 @@ var chartOptions =  {
             point: {
                 events: {
                     click: function() {
-                        alert ('Name: '+ this.name +', value: '+ this.y);
+                        //alert ('Name: '+ this.name +', value: '+ this.y);
+                        graphOnClick({gap:gap,label:this.name})
                     }
                 }
             }
@@ -79,18 +95,39 @@ function initChart() {
 }
 
 
+function getChartGap() {
+    //get gap based on plugin date
+    var dates = getPluginDates();
+    var start = dates.start;
+    var end = dates.end;
 
-var graphData = [];
+    if(start.year != end.year) {
+        return "+1YEAR/YEAR";
+    } else if(start.month != end.month) {
+        return "+1MONTH/MONTH";
+    } else if(start.day != end.day) {
+        return "+1DAY/DAY";
+    } else if(start.hour != end.hour) {
+        return "+1HOUR/HOUR";
+    } else if(start.min != end.min) {
+        return "+1MINUTE/MINUTE";
+    } else {
+        return "1YEAR/YEAR";
+    }
+
+}
+
+var graphData = [],gap;
 
 function populateChart(params) {
     
     
     chart.hideLoading();
-    
-    var gap = params['gap'];
+
+    gap = params['gap'];
 
     var solrData = params['counts'];
-    console.log(solrData);
+   // console.log(solrData);
 
     if(solrData.length == 0) {
         //TODO - clear the graph
@@ -113,7 +150,6 @@ function populateChart(params) {
             tempHash[startYear.toString()]  = 0;
             startYear++;
         }
-
         
         for(var i=0;i<solrData.length;i=i+2){
             var value = solrData[i];
@@ -121,15 +157,47 @@ function populateChart(params) {
             var count = solrData[i+1];
         
             tempHash[year.toString()] = count;
-
-
         }
 
-        graphData = hashToArray(tempHash);
+        
+    } else if(gap.match(/MONTH/)) {
+
+        var startYear = dates.start.year;
+        for(var i=1;i<=12;i++) {
+            tempHash[startYear+"-"+monthMapper[i]] = 0;
+        }
+
+        for(var i=0;i<solrData.length;i=i+2){
+            var value = solrData[i];
+            var year = getComponentsFromSolrDate(value)['year'];
+            var month = monthMapper[getComponentsFromSolrDate(value)['month']];
+
+            var count = solrData[i+1];
+        
+            tempHash[startYear+"-"+month] = count;
+        }
+
+
     }
 
-
+    graphData = hashToArray(tempHash);
     chart.series[0].setData(graphData,true);
+
+}
+
+
+function getComponentsFromSolrDate(solrDate) {
+
+    var comp = solrDate.match(/(\d+)\-(\d+)-(\d+)T(\d+):(\d+):(\d+)Z/);
+    return({
+        year: comp[1],
+        month: comp[2],
+        day: comp[3],
+        hour: comp[4],
+        min: comp[5],
+        sec: comp[6]
+    });
+
 
 }
 
@@ -181,7 +249,25 @@ function getPluginDates() {
 
 
 function graphOnClick(params) {
-    var gap = params.gap;
+    //var gap = params.gap;
     var label = params.label;
+    
+    var startDate,endDate;
+    if(gap.match(/YEAR/)) {
+        startDate = label + "-01-01 00:00";
+        endDate = label + "-12-31 23:23";
+
+    }  else if(gap.match(/MONTH/)) {
+
+        var year = label.replace(/\-.*/,'');
+        var month = label.replace(/.*\-/,'');
+
+        startDate = label + "-01-01 00:00";
+        endDate = label + "-12-31 23:23";
+    }
+
+    changeDateInPlugin({startDate:startDate, endDate:endDate});
+
+    startSearch();
 
 }

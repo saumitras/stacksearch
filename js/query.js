@@ -13,6 +13,9 @@ function querySolr() {
 	var start = ($('#pagination').pagination('getCurrentPage') - 1) * $('#rows').val();
 	var fq = getDateFilterQuery();
 
+	gap = getChartGap(); //BEWARE: gap is a global varibale
+
+	var dates = getPluginDateInSolrFormat();
 
 	var params = {
 		"q" :q,
@@ -27,9 +30,9 @@ function querySolr() {
 		"facet": true,
 		"facet.limit":20000,
 		"facet.range":"st_creationdate",
-		"facet.range.start":"2011-03-22T01:33:06Z",
-		"facet.range.end":"2014-03-22T01:33:06Z",
-		"facet.range.gap":"+1YEAR/YEAR",
+		"facet.range.start":dates.start, //"2012-01-01T01:33:06Z",
+		"facet.range.end":dates.end, //"2012-12-12T01:33:06Z",
+		"facet.range.gap":gap, //"+1MONTH/MONTH",
 		"hl":true,
 		"sort":sort,
 		"start":start,
@@ -43,7 +46,7 @@ function querySolr() {
 	
 
 	chart.showLoading();
-		
+
     searchRequest = $.ajax ({
         
         url : "http://" + APPDATA.SOLR_HOST + ":" + APPDATA.SOLR_PORT + "/solr/collection1/stacksearch",
@@ -158,7 +161,7 @@ function getAutoComplete() {
         jsonp: 'json.wrf',
 
         success : function(response) {
-        	console.log(response);
+        	//console.log(response);
             var terms = response.terms.st_post;
 
             var list = [];
