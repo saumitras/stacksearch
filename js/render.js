@@ -133,7 +133,7 @@ function onFacetSelection() {
 */
 function addNewFacet(data) {
 
-	console.log(data);
+	//console.log(data);
 
 	var facetName = data.parent;
 	var value = data.value;

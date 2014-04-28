@@ -1,5 +1,5 @@
 body {margin: 0px; padding: 0px; font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif; background-color: #FFF;
-		font-size:14px;		
+		font-size:13px;		
 }
 a { text-decoration: none;}
 .highlight em { background-color: #DBE232; color: #D33D3D; font-weight: bold; }
@@ -89,7 +89,7 @@ a { text-decoration: none;}
 
 #clearTime { 
 	display: none; 
-	background-color: #DF5D5D;
+	background-color: #45B7E4;
 	color: #FFF;
 	padding: 2px 5px 2px;
 	font-size: 12px;

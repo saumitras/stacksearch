@@ -1,10 +1,12 @@
 <html>
 <head>
 
-  <link href="css/main.css" rel="stylesheet">
-  <link href="lib/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
-  <link href="lib/jquery-autocomplete-master/src/jquery.autocomplete.css" rel="stylesheet">
-  <link href="lib/flaviusmatis-simplePagination.js/simplePagination.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="lib/datetimepicker/jquery.datetimepicker.css" >
+  <link rel="stylesheet" href="lib/jquery-autocomplete-master/src/jquery.autocomplete.css" >
+  <link rel="stylesheet" href="lib/flaviusmatis-simplePagination.js/simplePagination.css" >
+  <link rel="stylesheet" href="lib/reveal/reveal.css"> 
+
   
   <title>
     StackSearch
@@ -38,7 +40,9 @@
     </div>
 
     <div class="links">
-      <a href="#">Help</a>
+      <a href="#"  class="big-link" data-reveal-id="myModal" data-animation="none">
+          About
+      </a>
     </div>
 
   </div>
@@ -128,9 +132,67 @@
 </div>
 
 
+<div id="myModal" class="reveal-modal">
+  <h2>StackSearch - Apache Solr Demo - v0.1</h2>
+    <p align="center">
+    
+    <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out StackSearch - a demo application to showcase @ApacheSolr out of box capabilities" data-via="_saumitra_" >Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+    <a href="https://twitter.com/_saumitra_" class="twitter-follow-button" data-show-count="false" >Follow @_saumitra_</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+  </p>
+  <p>
+    Demo to show out of the box capabilities of <a href="https://lucene.apache.org/solr/" target="_blank">Apache Solr</a>. Motivation behind this application is to provide a configurable UI and middleware which can be used for quick POCs for any type of dataset.
+
+    <br><br>In this application we have indexed data from stackexchange sites using dumps available at  <a href="https://archive.org/details/stackexchange" target="_blank">https://archive.org/details/stackexchange</a>.
+    
+    <br><br>This demo shows following Solr features:
+    <ul>
+      <li>Full Text Search, Highlighting</li>
+      <li>Faceting, Pagination, Sorting</li>
+      <li>Clustering, More Like this, AutoComplete</li>
+      <li>Range and function queries, fuzzy search, proximity search, boosting, range faceting</li>
+    </ul>
+    <h3>What's next - v0.2</h3>
+    <ul>
+      <li>Completely config driven. Plugin any kind of dataset.</li>
+      <li>Optional middleware using <a href="http://www.playframework.com/" target="_blank">Play framework</a></li>
+      <li>Query debug console</li>
+      <li>Multiple autocomplete suggesters</li>
+      <li>Opensource UI, middleware and backend(indexer)</li>
+    </ul>
+
+  </p>  
+  <hr>
+  <p>
+    Aru you in/around Bangalore and interested in search? Join these meetup groups:
+    <ul>
+      <li><a href="http://www.meetup.com/Bangalore-Baby-Apache-Solr-Group/" target="_blank">Bangalore-Baby-Apache-Solr-Group</a> (begineers stuff)</li>
+      <li><a href="http://www.meetup.com/Bangalore-Apache-Solr-Lucene-Group/" target="_blank">Bangalore-Apache-Solr-Lucene-Group</a> (intermediate to advanced)</li>
+    </ul>
+  </p>
+  <p>
+    Mail me at <a href="mailto:saumitra.srivastav7@gmail.com?Subject=Feedback" target="_top">saumitra.srivastav7@gmail.com</a> for any feedback or to just say Hi :)
+  </p>
+
+
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
 
 
 <script type="text/javascript" src='lib/jquery.min.js'></script>
+<script src="lib/reveal/jquery.reveal.js"></script>
+
+<script type="text/javascript">
+  $('a[data-reveal-id]').click();
+</script>
+
+
 <script type="text/javascript" src='lib/date.js'></script>
 <script type="text/javascript" src='lib/date.format.js'></script>
 <script type="text/javascript" src='lib/datetimepicker/jquery.datetimepicker.js'></script>
@@ -138,6 +200,7 @@
 <script type="text/javascript" src='lib/flaviusmatis-simplePagination.js/jquery.simplePagination.js'></script>
 <script src="lib/highchart/highcharts.js"></script>
 <script src="lib/highchart/no-data-to-display.js"></script>
+
 
 <!-- <script type="text/javascript" src='js/theme2.js'></script> -->  
 <script type="text/javascript" src='js/config.js'></script>
