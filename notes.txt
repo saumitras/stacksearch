@@ -3,3 +3,5 @@ https://github.com/dyve/jquery-autocomplete
 
 datepicker
 https://github.com/xdan/datetimepicker/
+
+http://www.minijs.com/plugins/8/notification#usage
